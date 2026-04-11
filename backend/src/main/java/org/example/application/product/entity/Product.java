@@ -15,14 +15,15 @@ public class Product {
     private int price;
 
     @Column(nullable = false)
-    private String quantity;
+    private int quantity;
+
 
     @Column(columnDefinition="TEXT")
     private String description;
 
     protected Product(){}
 
-    public Product(String name, int price, String quantity, String description )
+    public Product(String name, int price, int quantity, String description )
     {
         this.name = name;
         this.price = price;
@@ -42,7 +43,7 @@ public class Product {
 
     }
 
-    public String getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 

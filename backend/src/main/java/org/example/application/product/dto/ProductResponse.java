@@ -6,7 +6,7 @@ public record ProductResponse (
     Long id,
     String name,
     int price,
-    String quantity,
+    int quantity,
     String description
 )
 {
