@@ -24,14 +24,11 @@ jobs:
       run: |
         mkdir -p backend/src/main/resources
         mkdir -p backend/src/test/resources
-        echo "${{ secrets.APPLICATION_PROPERTIES }}" > ./backend/src/main/resources/application.properties
-        echo "${{ secrets.TEST_APPLICATION_PROPERTIES }}" > ./backend/src/test/resources/application.properties    
+        echo "${{ secrets.APPLICATION_PROPERTIES }}" > ./backend/src/main/resources/application.yaml
+        echo "${{ secrets.TEST_APPLICATION_PROPERTIES }}" > ./backend/src/test/resources/application.yaml    
     
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@v4
-    - name : 어디에 파일이 있나 확인하기
-      run : ls -R
-      working-directory: ./backend
       
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
@@ -83,10 +80,10 @@ jobs:
           # 2 도커 가상 네트워크 생성
           docker network inspect my-bridge >/dev/null 2>&1 || docker network create my-bridge
           docker run -d \
-          -p ${{ secrets.JAR_hostport }}:${{ secrets.JAR_localport }} \
+          -p ${{ secrets.JAR_HOSTPORT }}:${{ secrets.JAR_LOCALPORT }} \
           --name cicdtestcontainer \
           --network my-bridge \
-          -e SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:${{ secrets.postgreport  }}/postgres \
+          -e SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:${{ secrets.POSTGREPORT  }}/postgres \
           cicdtest-local
           
           sudo docker image prune -f
