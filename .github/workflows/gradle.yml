@@ -71,7 +71,7 @@ jobs:
           cat << 'EOF' > Dockerfile
           FROM eclipse-temurin:21-jdk-jammy
           COPY cicdtest.jar app.jar
-          ENTRYPOINT ["java", "-jar", "/app.jar"]
+          ENTRYPOINT ["java", "-Xmx2g","-jar", "/app.jar"]
           EOF
           # 1. sudo를 추가하여 권한 문제 해결 & 이미지 이름(cicdtest-local) 명시
           docker stop cicdtestcontainer || true
