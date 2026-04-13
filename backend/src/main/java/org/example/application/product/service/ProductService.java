@@ -20,7 +20,7 @@ public class ProductService {
     }
     //상품 전체 조회
 
-//    @Cacheable(value = "productList", sync = true)
+    @Cacheable(value = "productList")
     public List<ProductResponse> findAllProducts() {
         return productRepository.findAll().stream()
                 .map(ProductResponse::from)
